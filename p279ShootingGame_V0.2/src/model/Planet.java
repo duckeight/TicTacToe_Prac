@@ -11,8 +11,10 @@ public class Planet {
 	
 	private double gravity = 9.8d; 	//정보의 단위는 meter/sec^2를 쓰고 double
 	
+
 	private double surface = 0.0d;	//지표면의 고도는 나중에 울퉁불퉁 산 넣을 것이고, 지금은 평지
 	
+
 	private Cannon cannon = null;
 	private Bullet bullet = null;
 	private Target target = null;
@@ -24,6 +26,14 @@ public class Planet {
 		return theInstance;
 	}
 
+	public double getGravity() {
+		return gravity;
+	}
+
+	public double getSurface() {
+		return surface;
+	}
+	
 	public void setCannon(Cannon cannon) {
 		this.cannon = cannon;
 	}
