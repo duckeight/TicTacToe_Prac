@@ -14,9 +14,6 @@ public class GameController {
 		Cannon cannon = new Cannon(1000, 0, 0);
 		planet.setCannon(cannon);
 	
-		Bullet bullet = new Bullet();
-		planet.setBullet(bullet);
-		cannon.load(bullet);
 
 		//25km 앞에 있도록 게임을 만들 것
 		Target target = new Target(25000, 0);
@@ -25,10 +22,15 @@ public class GameController {
 		ResultOfShoot resultOfShoot;
 		//bullet 발사하기
 		do {
-			//bullet이 target을 맞추지 못하면 bullet 재생성, 다시 shootingBullet 불러옴-> 맞출 때까지 지속
+			Bullet bullet = new Bullet();
+			planet.setBullet(bullet);
+			cannon.load(bullet);
+			//bullet을 쏴 y값이 0일 때까지 움직임
 			cannon.shootBullet(bullet);
+			resultOfShoot = resultOfShoot(bullet, target);
+			//bullet이 target을 맞추지 못하면 bullet 재생성, 다시 shootingBullet 불러옴-> 맞출 때까지 지속
 			//bullet이 target을 맞추면 게임이 종료
-		} while ((resultOfShoot = resultOfShoot(bullet, target)) != ResultOfShoot.Success);
+		} while (resultOfShoot != ResultOfShoot.Success);
 		
 		//게임이 끝남
 		//bullet과 target이 사라지고, "BOOM!" 출력

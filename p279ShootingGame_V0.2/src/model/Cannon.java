@@ -16,7 +16,7 @@ public class Cannon extends Thing {
 	//관계 속성
 	private Bullet bullet = null;
 	
-	public Cannon(int intSpeed, double xPos, double yPos) {
+	public Cannon(int initSpeed, double xPos, double yPos) {
 		super(xPos, yPos);
 		this.initSpeed = initSpeed;
 	}
@@ -33,6 +33,13 @@ public class Cannon extends Thing {
 		double radianDegree = Math.toRadians(shootingDegree);
 		//bullet이 발사됨 -> xPos와 yPos 변화
 		int sec = 0;
-		bullet.move(initSpeed, radianDegree, sec);	//yPos가 0이 될때까지 sec++ 해준다
+		//초기 속도에 따른 초당 x와 y의 이동
+		Planet planet = Planet.getTheInstance(); 
+		double xMove = planet.calcXMoveInPlanet(initSpeed, radianDegree, sec);
+		double yMove = planet.calcYMoveInPlanet(initSpeed, radianDegree, sec);
+		//cannon의 y값과 같을 때까지 움직인다
+		do {
+			bullet.move(xMove, yMove, sec++);
+		} while (bullet.isSameYPos(this));
 	}
 }

@@ -45,4 +45,18 @@ public class Planet {
 	public void setTarget(Target target) {
 		this.target = target;
 	}
+
+	public double calcXMoveInPlanet(int initSpeed, double radianDegree, int sec) {
+		double result;
+		result = initSpeed * Math.cos(radianDegree) * sec;
+		return result;
+	}
+
+	public double calcYMoveInPlanet(int initSpeed, double radianDegree, int sec) {
+		double result;
+		result = initSpeed * Math.sin(radianDegree) * sec + gravity * sec / 2;
+		return result;
+	}
+
+
 }

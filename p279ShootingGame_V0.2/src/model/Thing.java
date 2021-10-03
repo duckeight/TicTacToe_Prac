@@ -16,19 +16,19 @@ public class Thing {
 	}
 	
 	public boolean isSameLoc(Thing other) {
+	 return isSameXPos(other) && isSameYPos(other);
+	}
+	
+	public boolean isSameXPos(Thing other) {
 		return this.xPos == other.xPos;
 	}
 	
-	//xPos += initSpeed * cos(발사각도 rad) * sec
-	//yPos += initSpeed * sin(발사각도 rad) * sec - 9.8 * sec / 2 - > thing에 메소드 생성
-	public void move(int initSpeed, double radianDegree, int sec) {
-		Planet planet = Planet.getTheInstance();
-		double xMove = initSpeed * Math.cos(radianDegree) * sec;
-		double yMove = initSpeed * Math.sin(radianDegree) * sec - planet.getGravity() * sec / 2;
-		do {
-			this.xPos += xMove;
-			this.yPos += yMove;
-			sec += 1;
-		} while (this.yPos != planet.getSurface());
+	public boolean isSameYPos(Thing other) {
+		return this.yPos == other.yPos;
+	}
+	
+	public void move(double xMove, double yMove, int sec) {
+		this.xPos += xMove;
+		this.yPos += yMove;
 	}
 }
