@@ -14,4 +14,6 @@ public class Thing {
 		this.xPos = other.xPos;
 		this.yPos = other.yPos;
 	}
+	
+	
 }

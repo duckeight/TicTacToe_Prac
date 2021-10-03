@@ -9,7 +9,7 @@ package model;
 public class Planet {
 	private static Planet theInstance = new Planet(); 
 	
-	private double gravity = 9.8d; 	//정보의 단위는 meter/sec를 쓰고 double
+	private double gravity = 9.8d; 	//정보의 단위는 meter/sec^2를 쓰고 double
 	
 	private double surface = 0.0d;	//지표면의 고도는 나중에 울퉁불퉁 산 넣을 것이고, 지금은 평지
 	
