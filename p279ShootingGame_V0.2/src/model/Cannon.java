@@ -33,6 +33,6 @@ public class Cannon extends Thing {
 		double radianDegree = Math.toRadians(shootingDegree);
 		//bullet이 발사됨 -> xPos와 yPos 변화
 		int sec = 0;
-		bullet.move(initSpeed, radianDegree, sec++);	//yPos가 0이 될때까지 sec++ 해준다
+		bullet.move(initSpeed, radianDegree, sec);	//yPos가 0이 될때까지 sec++ 해준다
 	}
 }
