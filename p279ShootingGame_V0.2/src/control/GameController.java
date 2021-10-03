@@ -29,6 +29,7 @@ public class GameController {
 			cannon.shootBullet(bullet);
 			resultOfShoot = resultOfShoot(bullet, target);
 			//bullet이 target을 맞추지 못하면 bullet 재생성, 다시 shootingBullet 불러옴-> 맞출 때까지 지속
+			//? : bullet이 target보다 앞에 떨어졌는지 뒤에 떨어졌는지 알려주는 법 고민
 			//bullet이 target을 맞추면 게임이 종료
 		} while (resultOfShoot != ResultOfShoot.Success);
 		
