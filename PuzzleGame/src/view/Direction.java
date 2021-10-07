@@ -1,6 +1,7 @@
 package view;
 
 public enum Direction {
+	//»óÇÏÁÂ¿ì
 	east(0, 1), west(0, -1), south(1, 0), north(-1, 0);
 	private int rowDelta, colDelta;
 	private Direction(int rowDelta, int colDelta) {

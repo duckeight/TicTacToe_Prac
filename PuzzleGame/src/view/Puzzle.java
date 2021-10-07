@@ -62,8 +62,8 @@ public class Puzzle extends JFrame implements ActionListener {
 		if (justClickedButton.getText() == " ") {
 			return;
 		}
-		//sysout 대신 popup 방식으로 디버깅용 정보 출력 방법
-		//JOptionPane.showMessageDialog(null, justClickedButton.toString());
+		// sysout 대신 popup 방식으로 디버깅용 정보 출력 방법
+		// JOptionPane.showMessageDialog(null, justClickedButton.toString());
 		for (Direction dir : Direction.values()) {
 			//클릭한 칸 주변 4곳의 칸 찾기
 			int provingRId = justClickedButton.rid + dir.getRowDelta();
