@@ -60,107 +60,39 @@ public class Puzzle extends JFrame implements ActionListener {
 			return;
 		}
 		//만약 이벤트로 받은 칸 주변에 빈칸이 있으면, 이웃한 칸이 빈칸인지 찾고 빈칸이면 서로 바꿔준다
-		if (justClickedButton.index == 0) {
-			//1 3
-			if (buttons[1].getText().equals(" ")) {
-				buttons[1].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[3].getText().equals(" ")) {
-				buttons[3].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 1) {
-			//0 2 4
-			if (buttons[0].getText().equals(" ")) {
-				buttons[0].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[2].getText().equals(" ")) {
-				buttons[2].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[4].getText().equals(" ")) {
-				buttons[4].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 2) {
-			// 1 5
-			if (buttons[1].getText().equals(" ")) {
-				buttons[1].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[5].getText().equals(" ")) {
-				buttons[5].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 3) {
-			// 0 4 6
-			if (buttons[0].getText().equals(" ")) {
-				buttons[0].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[4].getText().equals(" ")) {
-				buttons[4].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[6].getText().equals(" ")) {
-				buttons[6].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 4) {
-			// 1 3 5 7
-			if (buttons[1].getText().equals(" ")) {
-				buttons[1].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[3].getText().equals(" ")) {
-				buttons[3].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[5].getText().equals(" ")) {
-				buttons[5].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[7].getText().equals(" ")) {
-				buttons[7].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 5) {
-			// 2 4 8
-			if (buttons[2].getText().equals(" ")) {
-				buttons[2].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[4].getText().equals(" ")) {
-				buttons[4].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[8].getText().equals(" ")) {
-				buttons[8].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 6) {
-			// 3 7
-			if (buttons[3].getText().equals(" ")) {
-				buttons[3].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[7].getText().equals(" ")) {
-				buttons[7].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 7) {
-			// 4 6 8
-			if (buttons[4].getText().equals(" ")) {
-				buttons[4].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[6].getText().equals(" ")) {
-				buttons[6].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[8].getText().equals(" ")) {
-				buttons[8].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} else if (justClickedButton.index == 8) {
-			// 5 7
-			if (buttons[5].getText().equals(" ")) {
-				buttons[5].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			} else if (buttons[7].getText().equals(" ")) {
-				buttons[7].setText(justClickedButton.getText());
-				justClickedButton.setText(" ");
-			}
-		} 
+		//index가 첫번째 col(0, 3, 6)이면 +1 칸 검사
+		if (justClickedButton.index % 3 == 0) {
+			exchange(buttons[justClickedButton.index + 1], justClickedButton);
+		} else if (justClickedButton.index % 3 == 1) {
+			//index가 두번째 col(1, 4, 7)이면 -1, +1 칸 검사
+			exchange(buttons[justClickedButton.index - 1], justClickedButton);
+			exchange(buttons[justClickedButton.index + 1], justClickedButton);
+		} else if (justClickedButton.index % 3 == 2) {
+			//index가 세번째 col(2, 5, 8)이면 -1 칸 검사
+			exchange(buttons[justClickedButton.index - 1], justClickedButton);
+		}
+		
+		if (justClickedButton.index > 3) {
+			//index가 첫번째 row(0, 1, 2)이면 +3 칸 검사
+			exchange(buttons[justClickedButton.index + 3], justClickedButton);
+		} else if (justClickedButton.index > 2 && justClickedButton.index < 6) {
+			//index가 두번째 row(3, 4, 5)이면 -3, +3 칸 검사
+			exchange(buttons[justClickedButton.index - 3], justClickedButton);
+			exchange(buttons[justClickedButton.index + 3], justClickedButton);
+		} else if (justClickedButton.index > 5) {
+			//index가 세번째 row(6, 7, 8)이면 -3 칸 검사
+			exchange(buttons[justClickedButton.index - 3], justClickedButton);
+		}
+			//빈칸이면 서로 바꿔준다
+			
 		//이걸 좀 더 간단하게 할 방법??
+	}
+
+	protected void exchange(MyButton button, MyButton justClickedButton) {
+		if (button.equals(" ")) {
+			button.setText(justClickedButton.getText());
+			justClickedButton.setText(" ");
+		}
 	}
 
 	public static void main(String[] args) {
