@@ -68,10 +68,10 @@ public class Puzzle extends JFrame implements ActionListener {
 			//클릭한 칸 주변 4곳의 칸 찾기
 			int provingRId = justClickedButton.rid + dir.getRowDelta();
 			int provingCId = justClickedButton.cid + dir.getColDelta();
-			if (provingRId < 0 || provingRId >= ROOT) {
+			if (!isSafeArrayIndex(provingRId)) {
 				continue;
 			}
-			if (provingCId < 0 || provingCId >= ROOT) {
+			if (!isSafeArrayIndex(provingCId)) {
 				continue;
 			}
 			if (buttons[provingRId][provingCId].getText().equals(EMPTY_CELL_CAPTION)) {
@@ -79,6 +79,15 @@ public class Puzzle extends JFrame implements ActionListener {
 				justClickedButton.setText(EMPTY_CELL_CAPTION);
 			}
 		}
+	}
+
+	/**
+	 * ArrayOutOfBound 예외가 발생하지 않도록 검사 기능 수행
+	 * @param provingRId
+	 * @return
+	 */
+	protected boolean isSafeArrayIndex(int provingRId) {
+		return provingRId >= 0 && provingRId < ROOT;
 	}
 
 	public static void main(String[] args) {
